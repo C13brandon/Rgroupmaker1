@@ -2,7 +2,7 @@
 
 import random
 
-# Original list of students
+# Original list of students 
 original_students = [
     "Chris", "John", "yahkin", "Daniel", "Joshua",
     "Malachi", "Zechariah", "Peter", "Isaiah", "Titus",
@@ -10,13 +10,13 @@ original_students = [
     "Ezra", "Jerimiah", "Ezekiel", "Joel", "Job"
 ]
 
-# List to store pairs of students who cannot be together
+# List to keep pair os students who can't be together 
 exceptions = []
 
-# Ask user if they want to add exceptions
+# Ask the user if they want to add eceptions
 answer = input("Do you want to enter exceptions? (yes/no): ").lower()
 
-# If user chooses yes, allow them to enter restricted pairs
+# If the user decides yes,m allow them to enter restricted pairs
 if answer == "yes":
     print("Enter names of two students who CANNOT be together.")
     print("Type 'done' when finished.")
@@ -25,11 +25,11 @@ if answer == "yes":
     while True:
         student1 = input("First student name: ")
 
-        # Stop entering when user types 'done'
+        # Stop entering when user is done entering the two names (pair)
         if student1.lower() == "done":
             break
 
-        # Check if student exists in the list
+        # Check if student exist on the list
         if student1 not in original_students:
             print("Error: That student is not in the list. Please try again.")
             continue
@@ -40,17 +40,17 @@ if answer == "yes":
             print("Error: That student is not in the list. Please try again.")
             continue
 
-        # Add the pair as a tuple
+        # Add the pait as a immutable
         exceptions.append((student1, student2))
 
 
-# Main loop to keep generating groups if user wants
+# Main loop too keep creating groups if the user wants to
 while True:
-    # Ask for group size
+    # Ask for the group size
     group_size = int(input("\nHow many students per group? "))
 
     while True:
-        # Copy and shuffle students
+        # Copy and shuffle the studens names
         students = original_students.copy()
         random.shuffle(students)
 
@@ -58,7 +58,7 @@ while True:
 
         index = 0
 
-        # MANUAL COUNT: count total students (replaces len)
+        # MANUAL COUNT: count total amount of students
         student_count = 0
         for s in students:
             student_count += 1
@@ -69,7 +69,7 @@ while True:
             groups.append(group)
             index += group_size
 
-        # Check if groups are valid (no exception pairs together)
+        # Check if groups are valid (no exception pairs togehter)
         valid = True
 
         for group in groups:
@@ -80,7 +80,7 @@ while True:
             if not valid:
                 break
 
-        # If valid grouping is found, stop reshuffling
+        # If valid grouping is found, then stop reshuffling
         if valid:
             break
 
