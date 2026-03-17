@@ -1,6 +1,6 @@
 # Rgroupmaker1
 
-mport random
+import random
 
 # Original list of students
 original_students = [
