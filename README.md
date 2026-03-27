@@ -2,7 +2,7 @@
 
 import random
 
-# Original list of students 
+# Original list of students
 original_students = [
     "Chris", "John", "yahkin", "Daniel", "Joshua",
     "Malachi", "Zechariah", "Peter", "Isaiah", "Titus",
@@ -10,26 +10,21 @@ original_students = [
     "Ezra", "Jerimiah", "Ezekiel", "Joel", "Job"
 ]
 
-# List to keep pair os students who can't be together 
+# List to keep pairs of students who can't be together
 exceptions = []
 
-# Ask the user if they want to add eceptions
+# Ask the user if they want to add exceptions
 answer = input("Do you want to enter exceptions? (yes/no): ").lower()
 
-# If the user decides yes,m allow them to enter restricted pairs
+# If the user decides yes, allow them to enter restricted pairs
 if answer == "yes":
     print("Enter names of two students who CANNOT be together.")
-    print("Type 'done' when finished.")
     print("Capitalize ALL names that are entered.")
-    
+
     while True:
         student1 = input("First student name: ")
 
-        # Stop entering when user is done entering the two names (pair)
-        if student1.lower() == "done":
-            break
-
-        # Check if student exist on the list
+        # Check if student exists in the list
         if student1 not in original_students:
             print("Error: That student is not in the list. Please try again.")
             continue
@@ -40,36 +35,39 @@ if answer == "yes":
             print("Error: That student is not in the list. Please try again.")
             continue
 
-        # Add the pait as a immutable
+        # Add the pair
         exceptions.append((student1, student2))
 
+        # Ask if user wants to enter another pair
+        more = input("Do you want to enter another exception pair? (yes/no): ").lower()
+        if more != "yes":
+            break
 
-# Main loop too keep creating groups if the user wants to
+# Main loop to keep creating groups if the user wants to
 while True:
     # Ask for the group size
     group_size = int(input("\nHow many students per group? "))
 
     while True:
-        # Copy and shuffle the studens names
+        # Copy and shuffle the student names
         students = original_students.copy()
         random.shuffle(students)
 
         groups = []
-
         index = 0
 
-        # MANUAL COUNT: count total amount of students
+        # Count total students
         student_count = 0
         for s in students:
             student_count += 1
 
-        # Create groups manually using index
+        # Create groups
         while index < student_count:
             group = students[index:index + group_size]
             groups.append(group)
             index += group_size
 
-        # Check if groups are valid (no exception pairs togehter)
+        # Check if groups are valid
         valid = True
 
         for group in groups:
@@ -80,17 +78,17 @@ while True:
             if not valid:
                 break
 
-        # If valid grouping is found, then stop reshuffling
+        # Stop reshuffling if valid groups are found
         if valid:
             break
 
     # Print final groups
     print("\nFinal Groups:")
 
-    group_number = 0
+    group_number = 1
     for group in groups:
         print("Group", group_number, ":", group)
-        group_number = group_number + 1
+        group_number += 1
 
     # Ask if user wants to repeat
     again = input("\nDo you want to create another grouping? (yes/no): ").lower()
